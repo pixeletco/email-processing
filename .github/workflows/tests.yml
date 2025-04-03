@@ -8,6 +8,8 @@ on:
 
 jobs:
   test:
+    name: AWS Stack and Lamda Function
+
     runs-on: ubuntu-latest
 
     steps:

@@ -1,16 +1,16 @@
-// import * as cdk from 'aws-cdk-lib';
-// import { Template } from 'aws-cdk-lib/assertions';
-// import * as EmailProcessing from '../lib/email-processing-stack';
+import * as cdk from 'aws-cdk-lib'
+import { Template } from 'aws-cdk-lib/assertions'
+import { EmailProcessingStack } from '../lib/email-processing-stack'
 
-// example test. To run these tests, uncomment this file along with the
-// example resource in lib/email-processing-stack.ts
-test('SQS Queue Created', () => {
-  //   const app = new cdk.App();
-  //     // WHEN
-  //   const stack = new EmailProcessing.EmailProcessingStack(app, 'MyTestStack');
-  //     // THEN
-  //   const template = Template.fromStack(stack);
-  //   template.hasResourceProperties('AWS::SQS::Queue', {
-  //     VisibilityTimeout: 300
-  //   });
+test('S3 bucket and SQS queue are created', () => {
+  const app = new cdk.App()
+  const stack = new EmailProcessingStack(app, 'MyTestStack')
+
+  const template = Template.fromStack(stack)
+
+  // Check if an S3 Bucket is created
+  template.hasResource('AWS::S3::Bucket', {})
+
+  // Check if an SQS Queue is created
+  template.hasResource('AWS::SQS::Queue', {})
 })
