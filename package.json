@@ -22,7 +22,7 @@
     "@types/aws-lambda": "^8.10.148",
     "@types/jest": "^29.5.14",
     "@types/node": "22.7.9",
-    "aws-cdk": "^2.1006.0",
+    "aws-cdk": "^2.1007.0",
     "aws-sdk-client-mock": "^4.1.0",
     "aws-sdk-client-mock-jest": "^4.1.0",
     "esbuild": "0.25.2",

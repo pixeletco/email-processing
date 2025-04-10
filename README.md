@@ -1,14 +1,22 @@
-# Welcome to your CDK TypeScript project
+# Email Processing
 
-This is a blank project for CDK development with TypeScript.
+A resilient way to process incoming emails in Laravel using AWS.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## How it works
 
-## Useful commands
+1. A user sends an email to an already verified email address in the AWS account.
+2. SES receives the email and creates a new object in an S3 bucket.
+3. S3 sends an `s3:ObjectCreated:*` event to Lambda.
+4. Lambda processes the incoming S3 event and creates a new Laravel formatted message to add to the SQS queue.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+```mermaid
+graph TD
+  SES["Amazon SES"] -->|Receives Email| S3Bucket["S3 Bucket: SourceBucket"]
+
+  S3Bucket -->|"S3 Event: ObjectCreated"| Lambda["Lambda: S3EventProcessor"]
+
+  Lambda -->|"Send Message"| SQS["SQS Queue: EmailProcessingQueue"]
+
+  SES -->|"PutObject Permission"| S3Policy["Bucket Policy for SES"]
+  S3Policy -.-> S3Bucket
+```
