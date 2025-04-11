@@ -14,7 +14,7 @@ export interface Payload {
   }
 }
 
-export class ProcessS3Object {
+export class ProcessIncomingEmail {
   object: string
 
   constructor(object: string) {

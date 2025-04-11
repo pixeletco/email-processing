@@ -66,10 +66,10 @@ test('Lambda sends SQS message on S3 event', async () => {
   expect(sqsClient).toHaveReceivedCommandWith(SendMessageCommand, {
     QueueUrl: process.env.QUEUE_URL,
     MessageBody: expect.toIncludeMultiple([
-      '"displayName":"App\\\\Jobs\\\\ProcessS3Object"',
+      '"displayName":"App\\\\Jobs\\\\ProcessIncomingEmail"',
       '"job":"Illuminate\\\\Queue\\\\CallQueuedHandler@call"',
-      '"commandName":"App\\\\Jobs\\\\ProcessS3Object"',
-      '"command":"O:24:\\"App\\\\Jobs\\\\ProcessS3Object\\":1:{s:6:\\"object\\";s:11:\\"example-key\\";}"',
+      '"commandName":"App\\\\Jobs\\\\ProcessIncomingEmail"',
+      '"command":"O:29:\\"App\\\\Jobs\\\\ProcessIncomingEmail\\":1:{s:6:\\"object\\";s:11:\\"example-key\\";}"',
     ]),
   })
 })

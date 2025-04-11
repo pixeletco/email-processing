@@ -3,7 +3,7 @@ import { S3Handler } from 'aws-lambda'
 import { SendMessageCommand, SQSClient } from '@aws-sdk/client-sqs'
 import { serialize } from 'php-serialize'
 
-import { type Payload, ProcessS3Object } from './utils/laravel'
+import { type Payload, ProcessIncomingEmail } from './utils/laravel'
 
 const sqsClient = new SQSClient()
 
@@ -15,11 +15,11 @@ export const handler: S3Handler = async (event): Promise<void> => {
   for (const record of event.Records) {
     const { object } = record.s3
 
-    const job = new ProcessS3Object(object.key)
+    const job = new ProcessIncomingEmail(object.key)
 
     const displayName = 'App\\Jobs\\' + job.constructor.name
     const command = serialize(job, {
-      [displayName]: ProcessS3Object,
+      [displayName]: ProcessIncomingEmail,
     })
 
     const payload: Payload = {
