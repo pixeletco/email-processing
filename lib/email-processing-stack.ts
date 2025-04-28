@@ -17,6 +17,7 @@ export class EmailProcessingStack extends cdk.Stack {
     // Create an SQS queue that allows our application to process incoming messages
     const emailProcessingQueue = new sqs.Queue(this, 'EmailProcessingQueue', {
       visibilityTimeout: cdk.Duration.seconds(30),
+      receiveMessageWaitTime: cdk.Duration.seconds(20),
     })
 
     // Create an S3 bucket for storing emails received from SES.
