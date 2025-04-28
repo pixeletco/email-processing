@@ -12,6 +12,7 @@ export interface Payload {
     commandName: string
     command: string
   }
+  createdAt: number
 }
 
 export class ProcessIncomingEmail {

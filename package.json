@@ -11,8 +11,8 @@
     "cdk": "cdk"
   },
   "dependencies": {
-    "@aws-sdk/client-sqs": "^3.777.0",
-    "aws-cdk-lib": "^2.186.0",
+    "@aws-sdk/client-sqs": "^3.797.0",
+    "aws-cdk-lib": "^2.192.0",
     "constructs": "^10.0.0",
     "php-serialize": "^5.1.3"
   },
