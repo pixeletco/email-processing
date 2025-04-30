@@ -25,6 +25,12 @@ describe('EmailProcessingStack', () => {
     })
   })
 
+  test('SQS queue is created with long polling', () => {
+    template.hasResourceProperties('AWS::SQS::Queue', {
+      ReceiveMessageWaitTimeSeconds: 20,
+    })
+  })
+
   test('SES Receipt Rule Set is created', () => {
     template.resourceCountIs('AWS::SES::ReceiptRuleSet', 1)
   })

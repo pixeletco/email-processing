@@ -37,6 +37,7 @@ export const handler: S3Handler = async (event): Promise<void> => {
         command,
       },
       createdAt: Math.floor(Date.now() / 1000),
+      delay: null,
     }
 
     // Prepare the message to send to the SQS queue...

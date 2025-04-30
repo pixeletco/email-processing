@@ -13,6 +13,7 @@ export interface Payload {
     command: string
   }
   createdAt: number
+  delay: number | null
 }
 
 export class ProcessIncomingEmail {
